@@ -1,0 +1,23 @@
+{
+  "name": "burgerbird-hakuchi20",
+  "version": "0.0.1",
+  "description": "Burgerbird!",
+  "main": "index.html",
+  "scripts": {
+    "test": "npm run browser-sync-test",
+    "browser-sync-test": "browser-sync start --files '*.html' --server '.' --start-path ''"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sebfried/burgerbird-hakuchi20.git"
+  },
+  "author": "hakuchi20",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sebfried/burgerbird-hakuchi20/issues"
+  },
+  "homepage": "https://github.com/sebfried/burgerbird-hakuchi20#readme",
+  "dependencies": {
+    "browser-sync": "^2.26.10"
+  }
+}
