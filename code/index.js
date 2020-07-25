@@ -2,14 +2,23 @@ import MainScene from "./Game/main-scene.js";
 import MainMenu from "./Menus/MainMenu.js";
 import Preloader from "./Menus/Preloader.js";
 
+const ratio = Math.max(window.innerWidth / window.innerHeight, window.innerHeight / window.innerWidth)
+const DEFAULT_HEIGHT = 720
+const DEFAULT_WIDTH = ratio * DEFAULT_HEIGHT
+
 const config = {
     type: Phaser.AUTO,
-    width: 800,
-    height: 500,
     backgroundColor: "#000c1f",
 
     // Scenes of the game
     scene: [Preloader,MainMenu,MainScene],
+
+    scale: {
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+        width: DEFAULT_WIDTH,
+        height: DEFAULT_HEIGHT
+    },
 
     // Load up Matter and optionally configure it
     physics: {
