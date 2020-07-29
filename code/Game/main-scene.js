@@ -100,7 +100,7 @@ export default class MainScene extends Phaser.Scene {
                         let level = localStorage.getItem("levels");
                         level = parseInt(level);
                         let oLevel = parseInt(this.levelKey);
-                        if(oLevel>level) {
+                        if(!level || oLevel>level) {
                             localStorage.setItem("levels", this.levelKey);
                         }
                         this.scene.start("MainMenu");
