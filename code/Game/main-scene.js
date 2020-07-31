@@ -1,4 +1,6 @@
 import Player from "./Player.js"
+const width=window.innerWidth;
+const length=window.innerHeight;
 
 export default class MainScene extends Phaser.Scene {
     constructor(){
@@ -68,6 +70,20 @@ export default class MainScene extends Phaser.Scene {
             objectA: this.player.sprite,
             callback: this.onPlayerCollide,
             context: this
+        });
+
+        this.input.on('pointerdown',function (pointer){
+            let x = pointer.x;
+            if(x<=width/2){
+                this.scene.player.tLeft=1;
+            }
+            else{
+                this.scene.player.tRight=1;
+            }
+        });
+        this.input.on('pointerup',function (pointer) {
+            this.scene.player.tLeft=0;
+            this.scene.player.tRight=0;
         });
 
     }
