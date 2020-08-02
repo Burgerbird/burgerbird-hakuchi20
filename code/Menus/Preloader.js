@@ -1,13 +1,76 @@
+const width=window.innerWidth;
+const height=window.innerHeight;
+
 export default class MainMenu extends Phaser.Scene {
     constructor() {
         super({key: 'Preload'});
     }
     preload(){
+        //loading screen
+        this.progressBar = this.add.graphics();
+        this.progressBox = this.add.graphics();
+        this.progressBox.fillStyle(0x222222, 0.8);
+        this.progressBox.fillRect(width/2-320/2, height/2, 320, 50);
+        this.loadingText = this.make.text({
+            x: width / 2,
+            y: height / 2 - 50,
+            text: 'Loading...',
+            style: {
+                font: '20px monospace',
+                fill: '#ffffff'
+            }
+        });
+        this.percentText = this.make.text({
+            x: width / 2,
+            y: height / 2 - 15,
+            text: '0%',
+            style: {
+                font: '18px monospace',
+                fill: '#ffffff'
+            }
+        });
+        this.percentText.setOrigin(0.5, 0.5);
+        this.loadingText.setOrigin(0.5, 0.5);
+        this.assetText = this.make.text({
+            x: width / 2,
+            y: height / 2 + 70,
+            text: '',
+            style: {
+                font: '18px monospace',
+                fill: '#ffffff'
+            }
+        });
+
+        this.assetText.setOrigin(0.5, 0.5);
+
+        this.load.on('progress', function (value) {
+            this.scene.percentText.setText(parseInt(value * 100) + '%');
+            this.scene.progressBar.clear();
+            this.scene.progressBar.fillStyle(0xffffff, 1);
+            this.scene.progressBar.fillRect(width/2-320/2+10, height/2+10, 300 * value, 30);
+        });
+
+        this.load.on('fileprogress', function (file) {
+            this.scene.assetText.setText('Loading asset: ' + file.key);
+        });
+
+        this.load.on('complete', function () {
+            this.scene.progressBar.destroy();
+            this.scene.progressBox.destroy();
+            this.scene.loadingText.destroy();
+            this.scene.percentText.destroy();
+            this.scene.assetText.destroy();
+        });
+        //Game Files
         //images for game
         this.load.image("menu","assets\\menus\\menu_400x200_mountain.png");
         this.load.image("button", "assets\\menus\\button.png");
         this.load.image("fries", "assets\\sprites\\fries.png");
-        this.load.image("tut","assets\\maps\\tutorial.png")
+        this.load.image("tut","assets\\maps\\tutorial.png");
+        this.load.image("cake","assets\\maps\\cake.png");
+        //sounds for game
+        this.load.audio("coinSound","assets\\sounds\\SUCCESS PICKUP Collect Chime 01.wav");
+        this.load.audio("nextLevel","assets\\sounds\\RETRO Jump Up Bounce Long 03.wav");
         //spriteSheets
         this.load.spritesheet("donut", "assets\\sprites\\donut.png", { frameWidth: 60,
             frameHeight: 60});
