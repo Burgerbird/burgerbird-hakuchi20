@@ -1,6 +1,8 @@
-const ratio = Math.max(window.innerWidth / window.innerHeight, window.innerHeight / window.innerWidth)
-const DEFAULT_HEIGHT = 720
-const DEFAULT_WIDTH = ratio * DEFAULT_HEIGHT
+const ratio = Math.max(window.innerWidth / window.innerHeight, window.innerHeight / window.innerWidth);
+const DEFAULT_HEIGHT = 720;
+const DEFAULT_WIDTH = ratio * DEFAULT_HEIGHT;
+const width=window.innerWidth;
+const height=window.innerHeight;
 
 export default class MainMenu extends Phaser.Scene {
     constructor(){
@@ -23,11 +25,21 @@ export default class MainMenu extends Phaser.Scene {
             this.texts.push(this.add.text(-20, -10, str,{font:" Times"}));
         }
 
-        let heightEach = DEFAULT_HEIGHT/8;
-        let ogY = heightEach;
+        if(height>width){
+            var heightEach = DEFAULT_HEIGHT/8;
+            var ogY = 20;
 
-        let widthEach = DEFAULT_WIDTH/4;
-        let ogX= widthEach;
+            var widthEach = DEFAULT_WIDTH/6;
+            var ogX= 70;
+
+        }
+        else {
+            var heightEach = DEFAULT_HEIGHT / 8;
+            var ogY = heightEach;
+
+            var widthEach = DEFAULT_WIDTH / 4;
+            var ogX = widthEach;
+        }
 
         let c=this.add.container(ogX,ogY, [this.buttons[0], this.texts[0]])
             .setSize(95,25)
